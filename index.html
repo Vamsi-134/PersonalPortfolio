@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>My Portfolio</h1>
+
+    <!-- Gallery -->
+    <div class="gallery">
+        <img src="images/Timeline 1_00_00_13_11.jpg" onclick="openImage(this)">
+        <img src="images/Timeline 1_00_00_13_14.jpg" onclick="openImage(this)">
+    </div>
+
+    <!-- Fullscreen Preview -->
+    <div class="preview" id="preview">
+        <span onclick="closeImage()">X</span>
+        <img id="previewImg">
+    </div>
+
+    <!-- Videos -->
+    <h2>Videos</h2>
+    <video controls>
+        <source src="videos/20260329_132211.mp4">
+    </video>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
