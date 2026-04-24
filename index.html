@@ -271,11 +271,8 @@
       </div>
 
       <!-- Form -->
-      <form class="contact-form reveal-right" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmit(event)">
-        <!-- Web3Forms hidden fields -->
-        <input type="hidden" name="access_key" value="ee4f52e0-688c-4a2d-9838-11e5f57c12bc" />
-        <input type="hidden" name="subject" value="New Project Inquiry — Mavis Visuals" />
-        <input type="hidden" name="redirect" value="false" />
+      <form id="contactForm" class="contact-form reveal-right">
+        <input type="hidden" name="access_key" value="ee4f52e0-688c-4a2d-9838-11e5f57c12bc">
         <div class="form-row">
           <div class="form-group">
             <label>Your Name</label>

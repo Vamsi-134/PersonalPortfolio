@@ -729,7 +729,6 @@ footer {
   flex-direction: column;
   gap: 18px;
 }
-
 .skill-bar-label {
   display: flex;
   justify-content: space-between;

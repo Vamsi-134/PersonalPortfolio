@@ -282,21 +282,20 @@ document.querySelectorAll('.anim-up, .anim-left, .anim-right').forEach(el => {
 });
 
 // ═══════════════════════════════════════════
-// CONTACT FORM — WEB3FORMS INTEGRATION
+// CONTACT FORM — WEB3FORMS
 // ═══════════════════════════════════════════
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-  const submitBtn = contactForm.querySelector('.btn-submit');
+const form = document.getElementById('contactForm');
+if (form) {
+  const submitBtn = form.querySelector('button[type="submit"]');
   const successEl = document.getElementById('formSuccess');
 
-  contactForm.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(contactForm);
-    formData.append("access_key", "ee4f52e0-688c-4a2d-9838-11e5f57c12bc");
+    const formData = new FormData(form);
+    const originalText = submitBtn.querySelector('.btn-submit-text').textContent;
 
     // Button loading state
-    const originalText = submitBtn.querySelector('.btn-submit-text').textContent;
     submitBtn.querySelector('.btn-submit-text').textContent = 'Sending...';
     submitBtn.disabled = true;
 
@@ -308,12 +307,12 @@ if (contactForm) {
       const data = await response.json();
 
       if (response.ok) {
-        // Success
+        // ✅ Success
         submitBtn.style.display = 'none';
         successEl.style.display = 'block';
         successEl.style.color = '';
         successEl.textContent = "✦ Message sent! I'll get back to you within 24hrs.";
-        contactForm.reset();
+        form.reset();
 
         setTimeout(() => {
           submitBtn.style.display = 'flex';
@@ -323,7 +322,7 @@ if (contactForm) {
         }, 4000);
 
       } else {
-        // API error
+        // ❌ API error
         successEl.style.display = 'block';
         successEl.style.color = '#ff6b6b';
         successEl.textContent = '⚠ Error: ' + (data.message || 'Please try again.');
@@ -333,7 +332,7 @@ if (contactForm) {
       }
 
     } catch (error) {
-      // Network error
+      // ❌ Network error
       successEl.style.display = 'block';
       successEl.style.color = '#ff6b6b';
       successEl.textContent = '⚠ Network error. Please check your connection.';
@@ -344,5 +343,4 @@ if (contactForm) {
   });
 }
 
-// Fallback — prevents HTML onsubmit= attribute from throwing error
 function handleFormSubmit(e) { e.preventDefault(); }
