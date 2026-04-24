@@ -1,35 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mavis Visuals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-    <h1>My Portfolio</h1>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">MAVIS<span>VISUALS</span></div>
+  <ul class="nav-links">
+    <li onclick="scrollToSection('#hero')">Home</li>
+    <li onclick="scrollToSection('#services')">Services</li>
+    <li onclick="scrollToSection('#portfolio')">Portfolio</li>
+    <li>About</li>
+    <li>Contact</li>
+  </ul>
+  <button class="btn-quote">Get a Quote</button>
+</nav>
 
-    <!-- Gallery -->
-    <div class="gallery">
-        <img src="images/pic1.jpg" onclick="openImage(this)">
-        <img src="images/pic2.jpg" onclick="openImage(this)">
-        <img src="images/pic3.jpg" onclick="openImage(this)">
+<!-- HERO -->
+<section class="hero" id="hero">
+
+  <!-- ✅ Background image using <img> tag - most reliable method -->
+  <img class="hero-bg-img" src="images/Background.jpg" alt="" 
+       onerror="this.src='images/Background.png'" />
+
+  <!-- Dark overlays -->
+  <div class="hero-overlay-left"></div>
+  <div class="hero-overlay-bottom"></div>
+
+  <div class="hero-content">
+    <div class="hero-label">✦ Available for Projects</div>
+    <h1>
+      Professional
+      <span>Video Editing</span>
+      Services
+    </h1>
+    <p>Transforming your vision into stunning visuals — from YouTube content to cinematic productions.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="scrollToSection('#portfolio')">View My Work</button>
+      <button class="btn-secondary">
+        <span class="play-icon">▶</span>
+        Watch Reel
+      </button>
     </div>
+  </div>
 
-    <!-- Fullscreen Preview -->
-    <div class="preview" id="preview">
-        <span onclick="closeImage()">X</span>
-        <img id="previewImg">
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">Working on that</div>
+      <div class="stat-label">Projects Done</div>
     </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num"></div>
+      <div class="stat-label">Experience</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num"></div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+  </div>
+</section>
 
-    <!-- Videos -->
-    <h2>Videos</h2>
-    <video controls>
-        <source src="videos/20260329_132211.mp4">
-    </video>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What I Do</div>
+  <h2 class="section-title">Services I Offer</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">✂️</span>
+      <h3>Video Editing</h3>
+      <p>Clean cuts, seamless transitions, and perfectly timed edits that keep your audience hooked from start to finish.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🎨</span>
+      <h3>Color Grading</h3>
+      <p>Professional color correction and cinematic LUTs to give your footage a polished, consistent look and feel.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">▶️</span>
+      <h3>Motion Graphics</h3>
+      <p>Dynamic lower thirds, animated intros, and custom motion elements that elevate your brand identity.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔊</span>
+      <h3>Audio Mixing</h3>
+      <p>Crisp dialogue, balanced music, and sound design that make your video feel immersive and professional.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📱</span>
+      <h3>Short-Form Content</h3>
+      <p>Punchy Reels, Shorts, and TikToks optimized for each platform's algorithm and audience retention.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🎬</span>
+      <h3>Thumbnail Design</h3>
+      <p>Eye-catching thumbnails designed to boost click-through rates and grow your YouTube channel faster.</p>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">My Work</h2>
+  <div class="category-tabs" id="categoryTabs"></div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">MAVIS<span>VISUALS</span></div>
+  <div>© 2026 Mavis Visuals. All rights reserved.</div>
+  <div>Made with ❤️ for storytelling</div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lbImage" src="" alt=""/>
+  <div class="lightbox-info">
+    <h3 id="lbTitle"></h3>
+    <p id="lbInfo"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
