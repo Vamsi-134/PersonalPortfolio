@@ -171,3 +171,90 @@ function scrollToSection(selector) {
 // Init
 buildTabs();
 buildGallery(activeCategory);
+
+// ═══════════════════════════════════════════
+// SCROLL REVEAL — Intersection Observer
+// ═══════════════════════════════════════════
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+
+      // Trigger skill bars when about section enters view
+      if (entry.target.closest('.about')) {
+        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.w + '%';
+        });
+      }
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// Stagger tool tags on about entry
+const aboutSection = document.querySelector('.about');
+if (aboutSection) {
+  const toolObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.tool-tag').forEach((tag, i) => {
+        tag.style.opacity = '0';
+        tag.style.transform = 'translateY(16px)';
+        setTimeout(() => {
+          tag.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+          tag.style.opacity = '1';
+          tag.style.transform = 'none';
+        }, 600 + i * 80);
+      });
+      toolObserver.unobserve(aboutSection);
+    }
+  }, { threshold: 0.2 });
+  toolObserver.observe(aboutSection);
+}
+
+// Stagger contact cards
+const contactSection = document.querySelector('.contact');
+if (contactSection) {
+  const cardObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      document.querySelectorAll('.contact-card').forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(-20px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, background 0.3s';
+          card.style.opacity = '1';
+          card.style.transform = 'none';
+        }, 300 + i * 120);
+      });
+      cardObserver.unobserve(contactSection);
+    }
+  }, { threshold: 0.15 });
+  cardObserver.observe(contactSection);
+}
+
+// ═══════════════════════════════════════════
+// CONTACT FORM SUBMIT
+// ═══════════════════════════════════════════
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  const successEl = document.getElementById('formSuccess');
+
+  btn.disabled = true;
+  btn.querySelector('.btn-submit-text').textContent = 'Sending...';
+
+  setTimeout(() => {
+    btn.style.display = 'none';
+    successEl.style.display = 'block';
+    e.target.reset();
+    setTimeout(() => {
+      btn.style.display = 'flex';
+      btn.disabled = false;
+      btn.querySelector('.btn-submit-text').textContent = 'Send Message';
+      successEl.style.display = 'none';
+    }, 4000);
+  }, 1200);
+}
