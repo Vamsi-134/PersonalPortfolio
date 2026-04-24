@@ -282,25 +282,67 @@ document.querySelectorAll('.anim-up, .anim-left, .anim-right').forEach(el => {
 });
 
 // ═══════════════════════════════════════════
-// CONTACT FORM SUBMIT
+// CONTACT FORM — WEB3FORMS INTEGRATION
 // ═══════════════════════════════════════════
-function handleFormSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.btn-submit');
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+  const submitBtn = contactForm.querySelector('.btn-submit');
   const successEl = document.getElementById('formSuccess');
 
-  btn.disabled = true;
-  btn.querySelector('.btn-submit-text').textContent = 'Sending...';
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  setTimeout(() => {
-    btn.style.display = 'none';
-    successEl.style.display = 'block';
-    e.target.reset();
-    setTimeout(() => {
-      btn.style.display = 'flex';
-      btn.disabled = false;
-      btn.querySelector('.btn-submit-text').textContent = 'Send Message';
-      successEl.style.display = 'none';
-    }, 4000);
-  }, 1200);
+    const formData = new FormData(contactForm);
+    formData.append("access_key", "ee4f52e0-688c-4a2d-9838-11e5f57c12bc");
+
+    // Button loading state
+    const originalText = submitBtn.querySelector('.btn-submit-text').textContent;
+    submitBtn.querySelector('.btn-submit-text').textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+      const data = await response.json();
+
+      if (response.ok) {
+        // Success
+        submitBtn.style.display = 'none';
+        successEl.style.display = 'block';
+        successEl.style.color = '';
+        successEl.textContent = "✦ Message sent! I'll get back to you within 24hrs.";
+        contactForm.reset();
+
+        setTimeout(() => {
+          submitBtn.style.display = 'flex';
+          submitBtn.disabled = false;
+          submitBtn.querySelector('.btn-submit-text').textContent = originalText;
+          successEl.style.display = 'none';
+        }, 4000);
+
+      } else {
+        // API error
+        successEl.style.display = 'block';
+        successEl.style.color = '#ff6b6b';
+        successEl.textContent = '⚠ Error: ' + (data.message || 'Please try again.');
+        submitBtn.querySelector('.btn-submit-text').textContent = originalText;
+        submitBtn.disabled = false;
+        setTimeout(() => { successEl.style.display = 'none'; successEl.style.color = ''; }, 4000);
+      }
+
+    } catch (error) {
+      // Network error
+      successEl.style.display = 'block';
+      successEl.style.color = '#ff6b6b';
+      successEl.textContent = '⚠ Network error. Please check your connection.';
+      submitBtn.querySelector('.btn-submit-text').textContent = originalText;
+      submitBtn.disabled = false;
+      setTimeout(() => { successEl.style.display = 'none'; successEl.style.color = ''; }, 4000);
+    }
+  });
 }
+
+// Fallback — prevents HTML onsubmit= attribute from throwing error
+function handleFormSubmit(e) { e.preventDefault(); }
