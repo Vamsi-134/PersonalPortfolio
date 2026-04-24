@@ -1,39 +1,3 @@
-// ═══════════════════════════════════════════
-// SMOOTH PAGE INTRO
-// ═══════════════════════════════════════════
-(function () {
-  const intro     = document.getElementById('pageIntro');
-  const logoWrap  = document.getElementById('introLogoWrap');
-  const bar       = document.getElementById('introBar');
-  if (!intro || !logoWrap) return;
-
-  document.body.classList.add('intro-lock');
-
-  // Step 1 — Blur-in the logo (small delay so transition is seen)
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      logoWrap.classList.add('visible');
-    }, 80);
-  });
-
-  // Step 2 — Fill the progress bar
-  setTimeout(() => bar && bar.classList.add('fill'), 300);
-
-  // Step 3 — Logo exits (scale up + blur out)
-  setTimeout(() => logoWrap.classList.add('exit'), 2000);
-
-  // Step 4 — Whole overlay fades away
-  setTimeout(() => {
-    intro.classList.add('fade-out');
-    document.body.classList.remove('intro-lock');
-  }, 2500);
-
-  // Step 5 — Remove from DOM entirely
-  setTimeout(() => intro.remove(), 3700);
-})();
-
-// ═══════════════════════════════════════════
-
 // ============================================================
 // ✅ ADD YOUR WORK HERE
 // category: must match exactly one of the categories below
