@@ -489,13 +489,122 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .navbar { padding: 16px 24px; }
-  .nav-links { display: none; }
-  .hero { padding: 0 28px; }
-  .hero-stats { left: 28px; gap: 28px; }
-  .services, .portfolio { padding: 72px 24px; }
-  .gallery-grid { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+
+  /* Navbar */
+  .navbar {
+    padding: 14px 20px;
+  }
+  .nav-links {
+    display: none;
+  }
+  .btn-quote {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 80px 24px 160px;
+    min-height: 100vh;
+    align-items: flex-start;
+    padding-top: 100px;
+  }
+  .hero-content {
+    max-width: 100%;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 9vw, 3.2rem);
+    letter-spacing: 2px;
+  }
+  .hero h1 span {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+  .hero p {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+  .hero-actions {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn-primary {
+    padding: 13px 26px;
+    font-size: 0.88rem;
+  }
+  .hero-stats {
+    left: 24px;
+    right: 24px;
+    bottom: 40px;
+    gap: 0;
+    justify-content: space-between;
+  }
+  .stat-num {
+    font-size: 1.7rem;
+  }
+  .stat-divider {
+    height: 36px;
+  }
+
+  /* Services */
+  .services {
+    padding: 72px 24px;
+  }
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    padding: 28px 22px;
+  }
+
+  /* Portfolio */
+  .portfolio {
+    padding: 72px 24px;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .category-tabs {
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .tab-btn {
+    padding: 8px 20px;
+    font-size: 0.82rem;
+  }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero h1 span {
+    font-size: 1.8rem;
+  }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero-stats {
+    gap: 0;
+  }
+  .stat-num {
+    font-size: 1.5rem;
+  }
+  .stat-label {
+    font-size: 0.68rem;
+  }
 }
 
 /* ── CATEGORY TABS ── */

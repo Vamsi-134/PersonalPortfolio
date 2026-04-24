@@ -171,5 +171,3 @@ function scrollToSection(selector) {
 // Init
 buildTabs();
 buildGallery(activeCategory);
-
-
