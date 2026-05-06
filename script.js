@@ -344,3 +344,30 @@ if (form) {
 }
 
 function handleFormSubmit(e) { e.preventDefault(); }
+
+// ── CAMERA CURSOR ──
+(function () {
+  const cam = document.createElement('div');
+  cam.id = 'cameraCursor';
+  cam.textContent = '📷';
+  document.body.appendChild(cam);
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let camX = mouseX;
+  let camY = mouseY;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animate() {
+    camX += (mouseX - camX) * 0.12;
+    camY += (mouseY - camY) * 0.12;
+    cam.style.left = camX + 'px';
+    cam.style.top  = camY + 'px';
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
